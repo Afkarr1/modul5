@@ -29,6 +29,12 @@ class TestProductRoutes(unittest.TestCase):
         response = self.client.delete("/products/1")
         self.assertEqual(response.status_code, 204)  # Atau 200 tergantung implementasi kamu
 
+    def test_list_all_products(self):
+        response = self.client.get("/products")
+        self.assertEqual(response.status_code, 200)
+        # Optional: cek apakah response JSON berisi list
+        self.assertIsInstance(response.get_json(), list)
+
 if __name__ == '__main__':
     unittest.main()
 
