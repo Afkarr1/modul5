@@ -27,3 +27,13 @@ Feature: Product Service
     When I delete the product with ID "1"
     Then the response status code should be 204
 
+  Scenario: List all products
+    Given the following products
+      | name    | category | price  | available |
+      | Printer | Office   | 1200000| true      |
+      | Scanner | Office   | 900000 | true      |
+    When I visit the endpoint "/products"
+    Then the response status code should be 200
+    And the response should contain "Printer"
+    And the response should contain "Scanner"
+
