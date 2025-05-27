@@ -43,6 +43,14 @@ class TestProductRoutes(unittest.TestCase):
         for item in data:
             self.assertEqual(item["name"], "Printer")
 
+    def test_list_by_category(self):
+        response = self.client.get("/products?category=Office")
+        self.assertEqual(response.status_code, 200)
+        data = response.get_json()
+        self.assertIsInstance(data, list)
+        for item in data:
+            self.assertEqual(item["category"], "Office")
+
 if __name__ == '__main__':
     unittest.main()
 
