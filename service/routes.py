@@ -17,3 +17,18 @@ def get_product(product_id):
     else:
         abort(404)
 
+# UPDATE - PUT /products/<id>
+@app.route("/products/<int:product_id>", methods=["PUT"])
+def update_product(product_id):
+    product = next((p for p in PRODUCTS if p["id"] == product_id), None)
+    if not product:
+        abort(404)
+    data = request.get_json()
+    product.update({
+        "name": data.get("name", product["name"]),
+        "category": data.get("category", product["category"]),
+        "price": data.get("price", product["price"]),
+        "available": data.get("available", product["available"])
+    })
+    return jsonify(product), 200
+
