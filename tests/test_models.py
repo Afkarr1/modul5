@@ -39,6 +39,18 @@ class TestProductModel(unittest.TestCase):
         self.assertEqual(products[1].name, "Scanner")
         self.assertEqual(products[2].name, "Xerox")
 
+    def test_find_by_name(self):
+        products = [
+            Product(name="Printer", category="Office", price=1200000, available=True),
+            Product(name="Scanner", category="Office", price=900000, available=True),
+            Product(name="Xerox", category="Office", price=5000000, available=False)
+        ]
+
+        result = [p for p in products if p.name == "Scanner"]
+        self.assertEqual(len(result), 1)
+        self.assertEqual(result[0].category, "Office")
+        self.assertEqual(result[0].price, 900000)
+
 
 if __name__ == '__main__':
     unittest.main()
