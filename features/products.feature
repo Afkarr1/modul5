@@ -46,3 +46,13 @@ Feature: Product Service
     Then the response status code should be 200
     And the response should contain "Printer"
     And the response should not contain "Fan"
+  Scenario: Search for products by availability
+    Given the following products
+      | name     | category | price  | available |
+      | Printer  | Office   | 1200000| true      |
+      | Scanner  | Office   | 900000 | false     |
+    When I visit the endpoint "/products?available=true"
+    Then the response status code should be 200
+    And the response should contain "Printer"
+    And the response should not contain "Scanner"
+
