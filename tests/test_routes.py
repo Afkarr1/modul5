@@ -51,6 +51,14 @@ class TestProductRoutes(unittest.TestCase):
         for item in data:
             self.assertEqual(item["category"], "Office")
 
+    def test_list_by_availability(self):
+        response = self.client.get("/products?available=true")
+        self.assertEqual(response.status_code, 200)
+        data = response.get_json()
+        self.assertIsInstance(data, list)
+        for item in data:
+            self.assertTrue(item["available"])
+
 if __name__ == '__main__':
     unittest.main()
 
