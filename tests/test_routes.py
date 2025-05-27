@@ -25,6 +25,10 @@ class TestProductRoutes(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         # Bisa tambah assertEqual untuk response JSON jika perlu
 
+    def test_delete_product(self):
+        response = self.client.delete("/products/1")
+        self.assertEqual(response.status_code, 204)  # Atau 200 tergantung implementasi kamu
+
 if __name__ == '__main__':
     unittest.main()
 
