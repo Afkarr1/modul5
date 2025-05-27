@@ -32,3 +32,13 @@ def update_product(product_id):
     })
     return jsonify(product), 200
 
+# DELETE - DELETE /products/<id>
+@app.route("/products/<int:product_id>", methods=["DELETE"])
+def delete_product(product_id):
+    global PRODUCTS
+    product = next((p for p in PRODUCTS if p["id"] == product_id), None)
+    if not product:
+        abort(404)
+    PRODUCTS = [p for p in PRODUCTS if p["id"] != product_id]
+    return '', 204
+
