@@ -25,3 +25,8 @@ def step_impl(context, text):
     response_text = context.response.text
     assert text not in response_text, f'"{text}" was found in response: {response_text}'
 
+@then('a message "{message}" should be present')
+def step_impl(context, message):
+    response_text = context.response.text
+    assert message in response_text, f'Message "{message}" not found in response: {response_text}'
+
