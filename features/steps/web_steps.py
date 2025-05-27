@@ -20,3 +20,8 @@ def step_impl(context, text):
     response_text = context.response.text
     assert text in response_text, f'"{text}" not found in response: {response_text}'
 
+@then('the response should not contain "{text}"')
+def step_impl(context, text):
+    response_text = context.response.text
+    assert text not in response_text, f'"{text}" was found in response: {response_text}'
+
