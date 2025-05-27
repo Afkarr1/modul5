@@ -15,3 +15,8 @@ def step_impl(context):
     response = requests.put(f"{API_URL}/1", json=payload)
     context.response = response
 
+@then('the response should contain "{text}"')
+def step_impl(context, text):
+    response_text = context.response.text
+    assert text in response_text, f'"{text}" not found in response: {response_text}'
+
