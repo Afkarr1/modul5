@@ -17,6 +17,16 @@ class TestProductModel(unittest.TestCase):
         self.assertEqual(product.name, "Laser Printer")
         self.assertEqual(product.price, 1500000)
 
+    def test_delete_product(self):
+        products = []
+        product1 = Product(name="Printer", category="Office", price=1200000, available=True)
+        product2 = Product(name="Scanner", category="Office", price=900000, available=True)
+        products.append(product1)
+        products.append(product2)
+        products.remove(product1)
+        self.assertEqual(len(products), 1)
+        self.assertEqual(products[0].name, "Scanner")
+
 if __name__ == '__main__':
     unittest.main()
 
