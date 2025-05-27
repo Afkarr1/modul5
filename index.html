@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dealer Evaluation</title>
+</head>
+<body>
+    <h1>Dealer Evaluation Frontend</h1>
+
+    <label for="product-select">Select a Product:</label>
+    <select id="product-select" onchange="showAllDealerPrices()">
+        <option value="">-- Choose Product --</option>
+        <option value="all">All Dealers</option>
+        <option value="printer">Printer</option>
+        <option value="scanner">Scanner</option>
+        <option value="xerox">Xerox</option>
+        <option value="canon">Canon</option>
+    </select>
+
+    <h3>Dealer Prices:</h3>
+    <ul id="dealer-price-list"></ul>
+
+    <script>
+        const productDealers = {
+            printer: [
+                { name: "Dealer A", price: "Rp 1.200.000" },
+                { name: "Dealer B", price: "Rp 1.300.000" }
+            ],
+            scanner: [
+                { name: "Dealer C", price: "Rp 800.000" }
+            ],
+            xerox: [
+                { name: "Dealer D", price: "Rp 5.000.000" },
+                { name: "Dealer E", price: "Rp 4.800.000" }
+            ],
+            canon: [
+                { name: "Dealer G", price: "Rp 3.200.000" }
+            ]
+        };
+
+        function showAllDealerPrices() {
+            const selectedProduct = document.getElementById("product-select").value;
+            const list = document.getElementById("dealer-price-list");
+            list.innerHTML = "";
+
+            if (selectedProduct === "all") {
+                for (const product in productDealers) {
+                    productDealers[product].forEach(dealer => {
+                        const li = document.createElement("li");
+                        li.textContent = `${dealer.name} - ${dealer.price} (${product})`;
+                        list.appendChild(li);
+                    });
+                }
+            } else if (productDealers[selectedProduct]) {
+                productDealers[selectedProduct].forEach(dealer => {
+                    const li = document.createElement("li");
+                    li.textContent = `${dealer.name} - ${dealer.price}`;
+                    list.appendChild(li);
+                });
+            }
+        }
+    </script>
+</body>
+</html>
+
