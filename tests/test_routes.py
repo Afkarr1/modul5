@@ -35,6 +35,14 @@ class TestProductRoutes(unittest.TestCase):
         # Optional: cek apakah response JSON berisi list
         self.assertIsInstance(response.get_json(), list)
 
+    def test_list_by_name(self):
+        response = self.client.get("/products?name=Printer")
+        self.assertEqual(response.status_code, 200)
+        data = response.get_json()
+        self.assertIsInstance(data, list)
+        for item in data:
+            self.assertEqual(item["name"], "Printer")
+
 if __name__ == '__main__':
     unittest.main()
 
