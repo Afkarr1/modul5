@@ -37,3 +37,12 @@ Feature: Product Service
     And the response should contain "Printer"
     And the response should contain "Scanner"
 
+  Scenario: Search for products by category
+    Given the following products
+      | name    | category | price  | available |
+      | Printer | Office   | 1200000| true      |
+      | Fan     | Home     | 350000 | true      |
+    When I visit the endpoint "/products?category=Office"
+    Then the response status code should be 200
+    And the response should contain "Printer"
+    And the response should not contain "Fan"
