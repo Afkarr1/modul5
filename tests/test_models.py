@@ -51,6 +51,17 @@ class TestProductModel(unittest.TestCase):
         self.assertEqual(result[0].category, "Office")
         self.assertEqual(result[0].price, 900000)
 
+    def test_find_by_availability(self):
+        products = [
+            Product(name="Printer", category="Office", price=1200000, available=True),
+            Product(name="Scanner", category="Office", price=900000, available=True),
+            Product(name="Xerox", category="Office", price=5000000, available=False)
+        ]
+
+        result = [p for p in products if p.available]
+        self.assertEqual(len(result), 2)
+        self.assertTrue(all(p.available for p in result))
+
 
 if __name__ == '__main__':
     unittest.main()
